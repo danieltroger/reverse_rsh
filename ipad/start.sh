@@ -2,10 +2,10 @@
 while true
 do
   mode=$(activator current-mode)
-  if [ "$mode" -ne "lockscreen" ]
+  if [ "$mode" != "lockscreen" ]
   then
     reachable=$(sbnetwork vps.natur-kultur.eu)
-    if [ "$reachable" -ne "FAILED" ]
+    if [ "$reachable" != "FAILED" ]
     then
       php client.php
     fi
