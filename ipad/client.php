@@ -47,7 +47,7 @@ if (is_resource($process) && is_resource($connection)) {
         $t = (int) $s[1];
         if($t == $lastping)
         {
-          echo "Updated lastpong" . PHP_EOL;
+          //echo "Updated lastpong" . PHP_EOL;
           $lastpong = $t;
         }
       }
