@@ -30,6 +30,7 @@ $lastping = time();
 socket_set_nonblock($msgsock);
 sleep(1);
 do {
+    if(time()-$lastping > 60){echo "Ping timeout" . PHP_EOL; break;}
     $data = fgets($stdin);
     if($data) answer("data:" . base64_encode($data));
     $buf = @socket_read($msgsock, 1048576);
@@ -46,13 +47,14 @@ do {
       {
         answer("pong:" . $s[1]);
         $lastping = time();
+        $t = (int) $s[1];
+        echo "Latency: " . ($lastping-$t) . "s" . PHP_EOL;
       }
       if($s[0] == "data")
       {
         echo base64_decode($s[1]) . "> ";
       }
     }
-    //if(time()-$lastping > 60){echo "Ping timeout" . PHP_EOL; break;}
     usleep(500000);
 } while (true);
 socket_close($msgsock);
